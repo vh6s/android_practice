@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">priprava</string>
+    <string name="cannot_be_empty">cannot be empty</string>
+</resources>
