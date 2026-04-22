@@ -12,7 +12,7 @@ import com.example.priprava.ui.screens.EntityDetailScreen
 import com.example.priprava.ui.screens.EntityListScreen
 
 @Composable
-fun ToDoNavGraph(
+fun EntityNavGraph(
     startDestination: ScreenDestination,
     navHostController: NavHostController = rememberNavController(),
     navRouter: INavigationRouter = remember {

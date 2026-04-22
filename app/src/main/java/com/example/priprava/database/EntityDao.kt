@@ -16,7 +16,7 @@ interface EntityDao {
     fun getAll(): Flow<List<Entity>>
 
     @Update
-    suspend fun update(task: Entity)
+    suspend fun update(entity: Entity)
 
     @Query("SELECT * FROM entities WHERE id = :id")
     fun getById(id: Long?): Flow<Entity>
