@@ -56,20 +56,18 @@ fun EntityDetailScreen(
         }
     ) {
         paddingValues ->
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = paddingValues.calculateBottomPadding()),
-            contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.padding(paddingValues))
+        {
             if (state.value.isLoading) {
                 Text("Loading...")
             } else {
                 entity?.let {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column {
                         Text(text = entity.title, fontSize = 24.sp)
                         Text(text = entity.text, fontSize = 16.sp)
                     }
                 }
             }
         }
-    }
+        }
 }
