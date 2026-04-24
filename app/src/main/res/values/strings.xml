@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">adroid_homework2</string>
+    <string name="cannot_be_empty">Value cannot be empty!</string>
+    <string name="title_too_long">Title limit exceeded 50 characters!</string>
+</resources>
