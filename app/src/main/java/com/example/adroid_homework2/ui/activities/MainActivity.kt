@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.adroid_homework2.navigation.ScreenDestination
+import com.example.adroid_homework2.navigation.TrainingNavGraph
 import com.example.adroid_homework2.ui.theme.Adroid_homework2Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +23,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Adroid_homework2Theme {
-                // TODO PRIDAT NAVGRAPH se start dest
+                TrainingNavGraph(
+                    startDestination = ScreenDestination.TrainingList
+                )
             }
         }
     }

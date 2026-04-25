@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">adroid_homework2</string>
     <string name="cannot_be_empty">Value cannot be empty!</string>
-    <string name="title_too_long">Title limit exceeded 50 characters!</string>
+    <string name="text_too_long">Text exceeded 50 characters!</string>
+    <string name="must_be_whole_number">The value must be a whole number!</string>
+    <string name="smaller_than_zero">Value must be bigger than 0!</string>
+    <string name="must_be_double">The value must a rational number!</string>
+    <string name="too_many_lines">Note must be less than 6 lines long!</string>
+    <string name="too_many_characters">You exceeded the 300 character limit! (nevim jestli jste myslel radky ve smyslu oddleni pomoci \\n nebo aby to odpovidalo cca 6 radkum textu...)</string>
 </resources>

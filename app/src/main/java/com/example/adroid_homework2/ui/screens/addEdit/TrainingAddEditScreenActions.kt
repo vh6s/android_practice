@@ -5,8 +5,8 @@ import com.example.adroid_homework2.database.ActivityType
 interface TrainingAddEditScreenActions {
     fun onTitleChange(title: String)
     fun onPlaceChange(place: String)
-    fun onTrainingLengthChange(length: Int)
-    fun onBurnedCaloriesChange(burnedCalories: Double)
+    fun onTrainingLengthChange(length: String)
+    fun onBurnedCaloriesChange(burnedCalories: String)
     fun onActivityTypeChange(activity: ActivityType)
     fun onNoteChange(note: String)
     fun saveTraining()

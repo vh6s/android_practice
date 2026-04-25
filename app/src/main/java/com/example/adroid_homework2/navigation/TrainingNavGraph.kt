@@ -10,7 +10,8 @@ import androidx.navigation.toRoute
 import com.example.adroid_homework2.ui.screens.addEdit.TrainingAddEditScreen
 import com.example.adroid_homework2.ui.screens.detail.TrainingDetailScreen
 import com.example.adroid_homework2.ui.screens.list.TrainingListScreen
-// TODO DODELAT az budou screeny
+import com.example.adroid_homework2.ui.screens.statistics.TrainingStatisticsScreen
+
 @Composable
 fun TrainingNavGraph(
     startDestination: ScreenDestination,
@@ -20,25 +21,30 @@ fun TrainingNavGraph(
     }
 ) {
     NavHost(
-        navHostController = navHostController,
+        navController = navHostController,
         startDestination = startDestination
     ) {
-        composable<ScreenDestination.WordList> {
+        composable<ScreenDestination.TrainingList> {
             TrainingListScreen(navigationRouter = navRouter)
         }
 
         composable<ScreenDestination.TrainingDetail> { backStackEntry ->
             val route = backStackEntry.toRoute<ScreenDestination.TrainingDetail>()
-            TrainingDetailScreen(navigationRouter = navRouter, id = route.id)
+            TrainingDetailScreen(
+                navigationRouter = navRouter,
+                id = route.id)
         }
 
-        composable<ScreenDestination.AddEditWord> { backStackEntry ->
-            val destination: ScreenDestination.AddEditWord = backStackEntry.toRoute()
+        composable<ScreenDestination.AddEditTraining> { backStackEntry ->
+            val destination: ScreenDestination.AddEditTraining = backStackEntry.toRoute()
             TrainingAddEditScreen(
                 navigationRouter = navRouter,
                 id = destination.id
             )
         }
 
+        composable<ScreenDestination.TrainingStatistics> {
+            TrainingStatisticsScreen(navigationRouter = navRouter)
+        }
     }
 }

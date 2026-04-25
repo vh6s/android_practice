@@ -59,12 +59,14 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.room.ktx)
     implementation(libs.room.viewmodel)
     implementation(libs.room.lifecycle)
     implementation(libs.room.runtime)
     implementation(libs.kotlin.serialization.json)
     ksp(libs.room.compiler.ksp)
+    implementation("androidx.navigation:navigation-compose:2.9.8")
 
     // Hilt
     implementation(libs.hilt.android)
@@ -74,5 +76,4 @@ dependencies {
     // Moshi
     implementation(libs.moshi)
     ksp(libs.moshi.ksp)
-
 }
