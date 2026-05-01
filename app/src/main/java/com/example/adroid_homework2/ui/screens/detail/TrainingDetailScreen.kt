@@ -129,10 +129,11 @@ fun TrainingDetailScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
+                        Spacer(modifier = Modifier.height(24.dp))
                         Text(text = training.title, fontSize = 48.sp)
                         Text(text = training.place, fontSize = 24.sp)
                         Spacer(modifier = Modifier.height(24.dp))
-                        Text(text = "Délka tréninku trvala ${training.trainingLength} minut")
+                        Text(text = "Trénink trval ${training.trainingLength} minut")
                         Text(text = "Kalorií spáleno: ${training.burnedCalories}")
                         Text(text = "Aktivita: ${training.activityType.toCzechName()}")
                         Spacer(modifier = Modifier.height(24.dp))

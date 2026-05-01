@@ -5,32 +5,41 @@ import androidx.lifecycle.viewModelScope
 import com.example.adroid_homework2.database.ITrainingRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class TrainingStatisticsViewModel @Inject constructor(private val repository: ITrainingRepo) : ViewModel() {
 
-    // todo
-    val uiState: StateFlow<TrainingStatisticsUIState> = repository.getTrainingStatistics()
-        .map { tuple ->
-            if (tuple == null || tuple.totalTrainings == 0) {
-                // Prázdný stav, pokud nejsou žádná data
-                TrainingStatisticsUIState(isLoading = false)
-            } else {
-                TrainingStatisticsUIState(
-                    isLoading = false,
-                    totalTrainings = tuple.totalTrainings ?: 0,
-                    totalMinutes = tuple.totalMinutes ?: 0,
-                    mostCommonActivity = tuple.mostCommonActivity
-                )
+    private val _trainingStatisticsUIState: MutableStateFlow<TrainingStatisticsUIState> =
+        MutableStateFlow(TrainingStatisticsUIState(isLoading = true))
+
+    val trainingStatisticsUIState = _trainingStatisticsUIState.asStateFlow()
+
+    init {
+        loadStatistics()
+    }
+
+    private fun loadStatistics() {
+        viewModelScope.launch {
+
+            repository.getTrainingStatistics().collect { stats ->
+                if (stats == null || stats.totalTrainings == 0) {
+                    _trainingStatisticsUIState.value = TrainingStatisticsUIState(isLoading = false)
+                } else {
+                    _trainingStatisticsUIState.value = TrainingStatisticsUIState(
+                        isLoading = false,
+                        totalTrainings = stats.totalTrainings ?: 0,
+                        totalMinutes = stats.totalMinutes ?: 0,
+                        mostCommonActivity = stats.mostCommonActivity
+                    )
+                }
             }
         }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = TrainingStatisticsUIState(isLoading = true)
-        )
+    }
 }

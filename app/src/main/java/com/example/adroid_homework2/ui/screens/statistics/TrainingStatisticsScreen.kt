@@ -23,7 +23,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +32,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.adroid_homework2.database.toCzechName
 import com.example.adroid_homework2.navigation.INavigationRouter
-import com.example.adroid_homework2.ui.screens.addEdit.AddEditTrainingScreenContent
 import com.example.adroid_homework2.ui.screens.list.getIconForActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +40,7 @@ fun TrainingStatisticsScreen(
     navigationRouter: INavigationRouter,
     viewModel: TrainingStatisticsViewModel = hiltViewModel()
 ) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val state = viewModel.trainingStatisticsUIState.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -60,7 +58,7 @@ fun TrainingStatisticsScreen(
     ) { paddingValues ->
         TrainingStatisticsScreenContent(
             paddingValues = paddingValues,
-            state = state
+            state = state.value
         )
     }
 }
@@ -102,11 +100,10 @@ fun TrainingStatisticsScreenContent(
                     .fillMaxSize()
                     .padding(paddingValues)
                     .padding(horizontal = 24.dp, vertical = 16.dp),
-                // Větší mezery (32.dp) pro jasné vizuální oddělení 3 textových sekcí
                 verticalArrangement = Arrangement.spacedBy(32.dp)
             ) {
 
-                // 1. Sekce: Celkem záznamů
+                // total trainigs
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
                         text = "Celkem záznamů:",
@@ -121,7 +118,7 @@ fun TrainingStatisticsScreenContent(
                     )
                 }
 
-                // 2. Sekce: Celkem odtrénováno
+                // total train time
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
                         text = "Celkem odtrénováno v minutách:",
@@ -136,7 +133,7 @@ fun TrainingStatisticsScreenContent(
                     )
                 }
 
-                // 3. Sekce: Nejběžnější cvičení
+                // most common activity type
                 state.mostCommonActivity?.let { activity ->
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text(
@@ -145,11 +142,9 @@ fun TrainingStatisticsScreenContent(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
 
-                        // Řádek s ikonkou a samotným názvem aktivity
                         Row(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            // Vaše ikonka s fixním pozadím
                             Box(
                                 modifier = Modifier
                                     .size(48.dp)
